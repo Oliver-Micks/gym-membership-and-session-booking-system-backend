@@ -65,4 +65,9 @@ public class StudioController {
         }
         return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
     }
+
+    @GetMapping(value = "/free")
+    public ResponseEntity<?> findFreeStudios() {
+        return new ResponseEntity<>(studioService.findFreeStudios(), HttpStatus.OK);
+    }
 }

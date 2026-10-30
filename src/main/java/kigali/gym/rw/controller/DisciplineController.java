@@ -65,4 +65,9 @@ public class DisciplineController {
         }
         return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
     }
+
+    @GetMapping(value = "/unused")
+    public ResponseEntity<?> findUnusedDisciplines() {
+        return new ResponseEntity<>(disciplineService.findUnusedDisciplines(), HttpStatus.OK);
+    }
 }

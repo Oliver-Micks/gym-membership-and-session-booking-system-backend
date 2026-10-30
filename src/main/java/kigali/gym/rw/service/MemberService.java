@@ -54,4 +54,8 @@ public class MemberService {
     public List<Member> findByLastName(String lastName) {
         return memberRepo.findByLastNameIgnoreCaseOrderByFirstNameAsc(lastName);
     }
+
+    public List<Member> findMembersOfTrainer(UUID trainerId) {
+        return memberRepo.findMembersOfTrainer(trainerId);
+    }
 }

@@ -50,4 +50,8 @@ public class TrainerService {
         trainerRepo.deleteById(id);
         return "Trainer deleted successfully";
     }
+
+    public List<Trainer> findByDiscipline(String name) {
+        return trainerRepo.findByDiscipline(name);
+    }
 }

@@ -46,4 +46,8 @@ public class DisciplineService {
         disciplineRepo.deleteById(id);
         return "Discipline deleted successfully";
     }
+
+    public List<Discipline> findUnusedDisciplines() {
+        return disciplineRepo.findUnusedDisciplines();
+    }
 }

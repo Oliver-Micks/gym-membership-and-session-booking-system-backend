@@ -47,4 +47,8 @@ public class StudioService {
         studioRepo.deleteById(id);
         return "Studio deleted successfully";
     }
+
+    public List<Studio> findFreeStudios() {
+        return studioRepo.findFreeStudios();
+    }
 }

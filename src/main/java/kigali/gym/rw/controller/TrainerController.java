@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kigali.gym.rw.domain.Trainer;
@@ -64,5 +65,10 @@ public class TrainerController {
             return new ResponseEntity<>(message, HttpStatus.OK);
         }
         return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping(value = "/by-discipline")
+    public ResponseEntity<?> findByDiscipline(@RequestParam String name) {
+        return new ResponseEntity<>(trainerService.findByDiscipline(name), HttpStatus.OK);
     }
 }

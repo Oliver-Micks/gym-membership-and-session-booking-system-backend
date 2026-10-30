@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kigali.gym.rw.domain.Member;
 import kigali.gym.rw.service.MemberService;
+import kigali.gym.rw.service.TrainerService;
 
 @RestController
 @RequestMapping(value = "/api/members")
@@ -25,6 +26,9 @@ public class MemberController {
 
     @Autowired
     private MemberService memberService;
+
+    @Autowired
+    private TrainerService trainerService;
 
     @PostMapping(value = "/save")
     public ResponseEntity<?> saveMember(@RequestBody Member member) {
@@ -70,5 +74,13 @@ public class MemberController {
     @GetMapping(value = "/by-last-name")
     public ResponseEntity<?> findByLastName(@RequestParam String lastName) {
         return new ResponseEntity<>(memberService.findByLastName(lastName), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/of-trainer/{trainerId}")
+    public ResponseEntity<?> findMembersOfTrainer(@PathVariable UUID trainerId) {
+        if (trainerService.findById(trainerId).isEmpty()) {
+            return new ResponseEntity<>("The trainer with that id does not exist", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(memberService.findMembersOfTrainer(trainerId), HttpStatus.OK);
     }
 }
