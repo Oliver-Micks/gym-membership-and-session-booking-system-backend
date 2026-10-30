@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PatchMapping;
 
 import kigali.gym.rw.domain.Session;
 import kigali.gym.rw.service.SessionService;
@@ -33,6 +34,12 @@ public class SessionController {
         String message = sessionService.saveSession(session);
         if (message.equals("Session saved successfully")) {
             return new ResponseEntity<>(message, HttpStatus.CREATED);
+        }
+        if (message.equals("Session date cannot be in the past")) {
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        if (message.equals("Trainer is already booked on that date")) {
+            return new ResponseEntity<>(message, HttpStatus.CONFLICT);
         }
         return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
     }
@@ -79,5 +86,17 @@ public class SessionController {
         LocalDate startDate = LocalDate.parse(start);
         LocalDate endDate = LocalDate.parse(end);
         return new ResponseEntity<>(sessionService.findBetween(startDate,endDate), HttpStatus.OK);
+    }
+
+    @PatchMapping(value = "/{id}/status")
+    public ResponseEntity<?> changeStatus(@PathVariable UUID id,@RequestParam SessionStatus status) {
+        String message = sessionService.changeStatus(id,status);
+        if (message.equals("Session status updated successfully")) {
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        }
+        if (message.equals("The session with that id does not exist")) {
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
     }
 }

@@ -14,4 +14,6 @@ import kigali.gym.rw.domain.SessionStatus;
 public interface SessionRepository extends JpaRepository<Session, UUID> {
     List<Session> findByStatusOrderBySessionDateAsc(SessionStatus status);
     List<Session> findBySessionDateBetweenOrderBySessionDateAsc(LocalDate start,LocalDate end);
+    
+    boolean existsByTrainerIdAndSessionDateAndStatusNot(UUID trainerId,LocalDate sessionDate,SessionStatus status);
 }

@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import kigali.gym.rw.domain.Trainer;
+import kigali.gym.rw.domain.Studio;
 
 @Repository
 public interface TrainerRepository extends JpaRepository<Trainer, UUID> {
@@ -19,4 +20,6 @@ public interface TrainerRepository extends JpaRepository<Trainer, UUID> {
     WHERE LOWER(d.name) = LOWER(:name)
     """)
     List<Trainer> findByDiscipline(@Param("name") String name);
+
+    boolean existsByStudio(Studio studio);
 }

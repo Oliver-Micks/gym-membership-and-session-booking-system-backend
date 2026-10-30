@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PatchMapping;
 
 import kigali.gym.rw.domain.Trainer;
 import kigali.gym.rw.service.TrainerService;
@@ -70,5 +71,29 @@ public class TrainerController {
     @GetMapping(value = "/by-discipline")
     public ResponseEntity<?> findByDiscipline(@RequestParam String name) {
         return new ResponseEntity<>(trainerService.findByDiscipline(name), HttpStatus.OK);
+    }
+
+    @PutMapping(value = "/{trainerId}/disciplines/{disciplineId}")
+    public ResponseEntity<?> addDiscipline(@PathVariable UUID trainerId,@PathVariable UUID disciplineId) {
+        String message = trainerService.addDiscipline(trainerId,disciplineId);
+        if (message.equals("Discipline added to the trainer")) {
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        }
+        if (message.equals("The trainer with that id does not exist") || message.equals("That discipline does not exist")) {
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(message, HttpStatus.CONFLICT);
+    }
+
+    @PatchMapping(value = "/{trainerId}/studio")
+    public ResponseEntity<?> changeStudio(@PathVariable UUID trainerId,@RequestParam int studioNumber) {
+        String message = trainerService.changeStudio(trainerId,studioNumber);
+        if (message.equals("Studio changed successfully")) {
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        }
+        if (message.equals("The trainer with that id does not exist") || message.equals("The studio with that studioNumber does not exist")) {
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(message, HttpStatus.CONFLICT);
     }
 }

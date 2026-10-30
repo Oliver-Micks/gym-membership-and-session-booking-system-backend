@@ -2,6 +2,7 @@ package kigali.gym.rw.repository;
 
 import java.util.UUID;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,4 +19,6 @@ public interface StudioRepository extends JpaRepository<Studio, UUID> {
     ORDER BY s.studioNumber ASC
     """)
     List<Studio> findFreeStudios();
+
+    Optional<Studio> findByStudioNumber(int studioNumber);
 }

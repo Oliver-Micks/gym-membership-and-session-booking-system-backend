@@ -19,6 +19,14 @@ public class SessionService {
     private SessionRepository sessionRepo;
 
     public String saveSession(Session session) {
+        if (session.getSessionDate().isBefore(LocalDate.now())) {
+            return "Session date cannot be in the past";
+        }
+        boolean booked = sessionRepo.existsByTrainerIdAndSessionDateAndStatusNot(session.getTrainer().getId(),session.getSessionDate(),SessionStatus.CANCELLED);
+        if (booked) {
+            return "Trainer is already booked on that date";
+        }
+        session.setStatus(SessionStatus.BOOKED);
         sessionRepo.save(session);
         return "Session saved successfully";
     }
@@ -38,7 +46,6 @@ public class SessionService {
         }
         old.get().setSessionDate(session.getSessionDate());
         old.get().setTimeSlot(session.getTimeSlot());
-        old.get().setStatus(session.getStatus());
         old.get().setMember(session.getMember());
         old.get().setTrainer(session.getTrainer());
         sessionRepo.save(old.get());
@@ -59,5 +66,20 @@ public class SessionService {
 
     public List<Session> findBetween(LocalDate start,LocalDate end) {
         return sessionRepo.findBySessionDateBetweenOrderBySessionDateAsc(start,end);
+    }
+
+    public String changeStatus(UUID id,SessionStatus newStatus) {
+        Optional<Session> session = sessionRepo.findById(id);
+        if (session.isEmpty()) {
+            return "The session with that id does not exist";
+        }
+        SessionStatus oldStatus = session.get().getStatus();
+        if ((oldStatus == SessionStatus.BOOKED && (newStatus == SessionStatus.CHECKED_IN || newStatus == SessionStatus.CANCELLED)) ||
+            (oldStatus == SessionStatus.CHECKED_IN && (newStatus == SessionStatus.ATTENDED || newStatus == SessionStatus.CANCELLED))) {
+            session.get().setStatus(newStatus);
+            sessionRepo.save(session.get());
+            return "Session status updated successfully";
+        }
+        return "Cannot change status from " + oldStatus + " to " + newStatus;
     }
 }
