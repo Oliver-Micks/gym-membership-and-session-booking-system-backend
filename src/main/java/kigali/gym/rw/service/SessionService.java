@@ -3,12 +3,14 @@ package kigali.gym.rw.service;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kigali.gym.rw.domain.Session;
 import kigali.gym.rw.repository.SessionRepository;
+import kigali.gym.rw.domain.SessionStatus;
 
 @Service
 public class SessionService {
@@ -49,5 +51,13 @@ public class SessionService {
         }
         sessionRepo.deleteById(id);
         return "Session deleted successfully";
+    }
+
+    public List<Session> findByStatus(SessionStatus status) {
+        return sessionRepo.findByStatusOrderBySessionDateAsc(status);
+    }
+
+    public List<Session> findBetween(LocalDate start,LocalDate end) {
+        return sessionRepo.findBySessionDateBetweenOrderBySessionDateAsc(start,end);
     }
 }

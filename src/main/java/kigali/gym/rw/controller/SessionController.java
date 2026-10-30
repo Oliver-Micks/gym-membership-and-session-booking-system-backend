@@ -2,6 +2,7 @@ package kigali.gym.rw.controller;
 
 import java.util.Optional;
 import java.util.UUID;
+import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kigali.gym.rw.domain.Session;
 import kigali.gym.rw.service.SessionService;
+import kigali.gym.rw.domain.SessionStatus;
 
 @RestController
 @RequestMapping(value = "/api/sessions")
@@ -64,5 +67,17 @@ public class SessionController {
             return new ResponseEntity<>(message, HttpStatus.OK);
         }
         return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping(value = "/by-status")
+    public ResponseEntity<?> findByStatus(@RequestParam SessionStatus status) {
+        return new ResponseEntity<>(sessionService.findByStatus(status), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/between")
+    public ResponseEntity<?> findBetween(@RequestParam String start,@RequestParam String end) {
+        LocalDate startDate = LocalDate.parse(start);
+        LocalDate endDate = LocalDate.parse(end);
+        return new ResponseEntity<>(sessionService.findBetween(startDate,endDate), HttpStatus.OK);
     }
 }

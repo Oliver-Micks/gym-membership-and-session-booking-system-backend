@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kigali.gym.rw.domain.Member;
 import kigali.gym.rw.service.MemberService;
@@ -64,5 +65,10 @@ public class MemberController {
             return new ResponseEntity<>(message, HttpStatus.OK);
         }
         return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping(value = "/by-last-name")
+    public ResponseEntity<?> findByLastName(@RequestParam String lastName) {
+        return new ResponseEntity<>(memberService.findByLastName(lastName), HttpStatus.OK);
     }
 }

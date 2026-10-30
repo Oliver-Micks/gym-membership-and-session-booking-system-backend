@@ -50,4 +50,8 @@ public class MemberService {
         memberRepo.deleteById(id);
         return "Member deleted successfully";
     }
+
+    public List<Member> findByLastName(String lastName) {
+        return memberRepo.findByLastNameIgnoreCaseOrderByFirstNameAsc(lastName);
+    }
 }
