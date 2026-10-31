@@ -11,12 +11,16 @@ import org.springframework.stereotype.Service;
 import kigali.gym.rw.domain.Session;
 import kigali.gym.rw.repository.SessionRepository;
 import kigali.gym.rw.domain.SessionStatus;
+import kigali.gym.rw.repository.WorkoutLogRepository;
 
 @Service
 public class SessionService {
 
     @Autowired
     private SessionRepository sessionRepo;
+
+    @Autowired
+    private WorkoutLogRepository workoutLogRepo;
 
     public String saveSession(Session session) {
         if (session.getSessionDate().isBefore(LocalDate.now())) {
@@ -53,8 +57,12 @@ public class SessionService {
     }
 
     public String deleteSession(UUID id) {
-        if (!sessionRepo.existsById(id)) {
+        Optional<Session> session = sessionRepo.findById(id);
+        if (session.isEmpty()) {
             return "The session with that id does not exist";
+        }
+        if (workoutLogRepo.existsBySession(session.get())) {
+            return "That session has workout logs, delete them first";
         }
         sessionRepo.deleteById(id);
         return "Session deleted successfully";

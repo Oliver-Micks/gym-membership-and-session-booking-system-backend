@@ -73,6 +73,9 @@ public class SessionController {
         if (message.equals("Session deleted successfully")) {
             return new ResponseEntity<>(message, HttpStatus.OK);
         }
+        if (message.equals("That session has workout logs, delete them first")) {
+            return new ResponseEntity<>(message, HttpStatus.CONFLICT);
+        }
         return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
     }
 
