@@ -1,0 +1,449 @@
+{
+  "info": {
+    "_postman_id": "d66dd555-f7b2-4531-906a-bf4b2d981863",
+    "name": "Mid-Term",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "56688249"
+  },
+  "item": [
+    {
+      "name": "A2",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/sessions/all",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "sessions",
+            "all"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "B1",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/members/by-last-name?lastName=byiringiro",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "members",
+            "by-last-name"
+          ],
+          "query": [
+            {
+              "key": "lastName",
+              "value": "byiringiro"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "B2",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/sessions/by-status?status=BOOKED",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "sessions",
+            "by-status"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "BOOKED"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "B3",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/sessions/between?start=2026-10-01&end=2026-10-31",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "sessions",
+            "between"
+          ],
+          "query": [
+            {
+              "key": "start",
+              "value": "2026-10-01"
+            },
+            {
+              "key": "end",
+              "value": "2026-10-31"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "C1",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/trainers/by-discipline?name=cardio",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "trainers",
+            "by-discipline"
+          ],
+          "query": [
+            {
+              "key": "name",
+              "value": "cardio"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "C2",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/studios/free",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "studios",
+            "free"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "C3",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/disciplines/unused",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "disciplines",
+            "unused"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "C4",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/members/of-trainer/7b48c692-0d95-4fc0-be7a-d203853c802a",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "members",
+            "of-trainer",
+            "7b48c692-0d95-4fc0-be7a-d203853c802a"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D1",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"sessionDate\": \"2026-12-05\",\r\n  \"status\": \"ATTENDED\",\r\n  \"timeSlot\": \"16:00-17:00\",\r\n  \"member\": {\r\n    \"id\": \"a10f6431-2ab2-4229-b9fc-7126d4e98c86\"\r\n  },\r\n  \"trainer\": {\r\n    \"id\": \"03d24761-2d81-469b-b9fc-70d24df261cf\"\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8083/api/sessions/save",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "sessions",
+            "save"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D2",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/sessions/bef2338a-2cb4-4421-a43b-69f0a251c625/status?status=CHECKED_IN",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "sessions",
+            "bef2338a-2cb4-4421-a43b-69f0a251c625",
+            "status"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "CHECKED_IN"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D3",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/trainers/03d24761-2d81-469b-b9fc-70d24df261cf/disciplines/acfc08bb-067c-4f2c-965d-55bf1e104419",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "trainers",
+            "03d24761-2d81-469b-b9fc-70d24df261cf",
+            "disciplines",
+            "acfc08bb-067c-4f2c-965d-55bf1e104419"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D4",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/trainers/03d24761-2d81-469b-b9fc-70d24df261cf/studio?studioNumber=4",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "trainers",
+            "03d24761-2d81-469b-b9fc-70d24df261cf",
+            "studio"
+          ],
+          "query": [
+            {
+              "key": "studioNumber",
+              "value": "4"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "E1",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"exerciseName\": \"Squats\",\r\n  \"trainerNotes\": \"Good form, increase the weight next time\",\r\n  \"sets\": 4\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8083/api/workout-logs/save?sessionId=c5990cd4-e268-48c5-914a-41bba547c276",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "workout-logs",
+            "save"
+          ],
+          "query": [
+            {
+              "key": "sessionId",
+              "value": "c5990cd4-e268-48c5-914a-41bba547c276"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "E2",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/workout-logs/member/GYM-0271",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "workout-logs",
+            "member",
+            "GYM-0271"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "E3",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/workout-logs/delete/47d4d4c4-5c49-46be-b71e-cf03c16260e7",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "workout-logs",
+            "delete",
+            "47d4d4c4-5c49-46be-b71e-cf03c16260e7"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "F1",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/sessions/stats/by-status",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "sessions",
+            "stats",
+            "by-status"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "F2",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8083/api/sessions/cancel-day?trainerId=03d24761-2d81-469b-b9fc-70d24df261cf&date=2026-12-20",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "sessions",
+            "cancel-day"
+          ],
+          "query": [
+            {
+              "key": "trainerId",
+              "value": "03d24761-2d81-469b-b9fc-70d24df261cf"
+            },
+            {
+              "key": "date",
+              "value": "2026-12-20"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

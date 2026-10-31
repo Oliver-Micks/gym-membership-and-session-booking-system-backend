@@ -6,6 +6,7 @@ import java.util.UUID;
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import kigali.gym.rw.domain.Session;
@@ -89,5 +90,15 @@ public class SessionService {
             return "Session status updated successfully";
         }
         return "Cannot change status from " + oldStatus + " to " + newStatus;
+    }
+
+    public List<Object[]> countSessionsByStatus() {
+        return sessionRepo.countSessionsByStatus();
+    }
+
+    @Transactional
+    public String cancelDay(UUID trainerId,LocalDate date) {
+        int count = sessionRepo.cancelDay(trainerId,date,SessionStatus.ATTENDED,SessionStatus.CANCELLED);
+        return count + " sessions cancelled";
     }
 }

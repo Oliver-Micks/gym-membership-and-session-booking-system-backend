@@ -102,4 +102,15 @@ public class SessionController {
         }
         return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
     }
+
+    @GetMapping(value = "/stats/by-status")
+    public ResponseEntity<?> countSessionsByStatus() {
+        return new ResponseEntity<>(sessionService.countSessionsByStatus(), HttpStatus.OK);
+    }
+
+    @PatchMapping(value = "/cancel-day")
+    public ResponseEntity<?> cancelDay(@RequestParam UUID trainerId,@RequestParam String date) {
+        LocalDate sessionDate = LocalDate.parse(date);
+        return new ResponseEntity<>(sessionService.cancelDay(trainerId,sessionDate), HttpStatus.OK);
+    }
 }
